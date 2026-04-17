@@ -1,7 +1,9 @@
 'use client';
 import Image from 'next/image';
-import geoFindMe from './geoFindMe';
+// import geoFindMe from './geoFindMe';
+import tempLogic from './components/tempLogic';
 import { useEffect, useState } from 'react';
+import Weather from './components/Weather';
 
 export default function Home() {
   // const [latitude, setLatitude] = useState();
@@ -10,51 +12,48 @@ export default function Home() {
   const [weather, setWeather] = useState('');
 
   useEffect(() => {
-    console.log('Page loaded');
-
-    let latitude = 0;
-    let longitude = 0;
-
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (pos) => {
-          latitude = pos.coords.latitude;
-          longitude = pos.coords.longitude;
-          console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
-
-          const fetchData = async () => {
-            try {
-              const response = await fetch(
-                `http://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=5&appid=cfacf018338e782fc383854b7bcc213a`,
-              );
-              const json = await response.json();
-              console.log(json[0]);
-              setData(json[0]);
-            } catch (error) {
-              console.error('Fetch error:', error);
-            }
-          };
-          const fetchWeather = async () => {
-            try {
-              const response = await fetch(
-                `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=cfacf018338e782fc383854b7bcc213a`,
-              );
-              const json = await response.json();
-              console.log(json);
-              setWeather(json);
-            } catch (error) {
-              console.error('Fetch Weather error:', error);
-            }
-          };
-
-          fetchData();
-          fetchWeather();
-        },
-        (err) => console.log(err.message),
-      );
-    } else {
-      console.log('Geolocation is not supported by this browser.');
-    }
+    // console.log('Page loaded');
+    // let latitude = 0;
+    // let longitude = 0;
+    // if (navigator.geolocation) {
+    //   navigator.geolocation.getCurrentPosition(
+    //     (pos) => {
+    //       latitude = pos.coords.latitude;
+    //       longitude = pos.coords.longitude;
+    //       console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+    //       const fetchData = async () => {
+    //         try {
+    //           const response = await fetch(
+    //             `http://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=5&appid=cfacf018338e782fc383854b7bcc213a`,
+    //           );
+    //           const json = await response.json();
+    //           console.log(json[0]);
+    //           setData(json[0]);
+    //         } catch (error) {
+    //           console.error('Fetch error:', error);
+    //         }
+    //       };
+    //       const fetchWeather = async () => {
+    //         try {
+    //           const response = await fetch(
+    //             `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=cfacf018338e782fc383854b7bcc213a`,
+    //           );
+    //           const json = await response.json();
+    //           console.log(json);
+    //           setWeather(json);
+    //         } catch (error) {
+    //           console.error('Fetch Weather error:', error);
+    //         }
+    //       };
+    //       fetchData();
+    //       fetchWeather();
+    //     },
+    //     (err) => console.log(err.message),
+    //   );
+    // } else {
+    //   console.log('Geolocation is not supported by this browser.');
+    // }
+    // console.log(tempLogic(weather.main.feels_like));
   }, []);
 
   return (
@@ -64,14 +63,7 @@ export default function Home() {
           <h1 className='max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50'>
             Soup or Salad?
           </h1>
-          <h2>
-            {weather ? weather.name : 'Loading...'},{' '}
-            {data ? data.state : 'Loading...'}
-          </h2>
-          <h2>
-            FEELS LIKE: {weather ? weather.main.feels_like : 'Loading ...'}
-            &deg;F
-          </h2>
+          <Weather />
           <label>Zip Code</label>
           <input className='' placeholder='zip'></input>
           <button id='find-me'>Show my location</button>
