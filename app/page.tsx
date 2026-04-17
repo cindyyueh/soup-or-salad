@@ -11,50 +11,7 @@ export default function Home() {
   const [data, setData] = useState('');
   const [weather, setWeather] = useState('');
 
-  useEffect(() => {
-    // console.log('Page loaded');
-    // let latitude = 0;
-    // let longitude = 0;
-    // if (navigator.geolocation) {
-    //   navigator.geolocation.getCurrentPosition(
-    //     (pos) => {
-    //       latitude = pos.coords.latitude;
-    //       longitude = pos.coords.longitude;
-    //       console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
-    //       const fetchData = async () => {
-    //         try {
-    //           const response = await fetch(
-    //             `http://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=5&appid=cfacf018338e782fc383854b7bcc213a`,
-    //           );
-    //           const json = await response.json();
-    //           console.log(json[0]);
-    //           setData(json[0]);
-    //         } catch (error) {
-    //           console.error('Fetch error:', error);
-    //         }
-    //       };
-    //       const fetchWeather = async () => {
-    //         try {
-    //           const response = await fetch(
-    //             `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=imperial&appid=cfacf018338e782fc383854b7bcc213a`,
-    //           );
-    //           const json = await response.json();
-    //           console.log(json);
-    //           setWeather(json);
-    //         } catch (error) {
-    //           console.error('Fetch Weather error:', error);
-    //         }
-    //       };
-    //       fetchData();
-    //       fetchWeather();
-    //     },
-    //     (err) => console.log(err.message),
-    //   );
-    // } else {
-    //   console.log('Geolocation is not supported by this browser.');
-    // }
-    // console.log(tempLogic(weather.main.feels_like));
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <div className='flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black'>
@@ -64,9 +21,6 @@ export default function Home() {
             Soup or Salad?
           </h1>
           <Weather />
-          <label>Zip Code</label>
-          <input className='' placeholder='zip'></input>
-          <button id='find-me'>Show my location</button>
         </div>
         <div className='flex flex-col gap-4 text-base font-medium sm:flex-row'>
           <a
